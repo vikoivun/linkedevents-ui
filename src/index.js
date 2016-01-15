@@ -16,6 +16,7 @@ import reducers from './reducers'
 import App from './views/App'
 import Editor from './views/Editor'
 import Search from './views/Search'
+import EventListing from './views/EventListing'
 
 // Initialize tap event plugin (used by material-ui components)
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -40,6 +41,7 @@ ReactDOM.render(
         <Router history={history}>
             <Route path="/" component={App}>
                 <IndexRoute component={Search}/>
+                <Route path="/organization/events" component={EventListing}/>
                 <Route path="/event/:action/:eventId" component={Editor}/>
             </Route>
         </Router>

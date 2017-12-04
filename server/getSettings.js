@@ -12,13 +12,16 @@ const defaults = {
 const configKeys = ["port", "publicUrl", "helsinkiAuthId", "helsinkiAuthSecret", "helsinkiTargetApp", "sessionSecret"];
 
 export default function getOptions() {
-    const nconf = require('nconf');
+    let nconf = require('nconf');
+    // We do not want the singleton, as webpack conf also uses nconf
+    // with its own defaults
+    nconf = new nconf.Provider();
 
     nconf.env(configKeys)
-    nconf.defaults(defaults)
     if(process.env.NODE_ENV == 'development') {
         nconf.file({file: 'config_dev.json'})
     }
+    nconf.defaults(defaults);
 
     nconf.required(configKeys)
 
